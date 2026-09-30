@@ -1,26 +1,185 @@
 @import "tailwindcss";
 
+/*
+ * MYN Target design tokens.
+ * Palette is derived from the logo: navy body + sky-blue diamonds.
+ * One accent (brand blue), one radius system (sharp, 0px), theme follows the OS.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #f2f5fa;
+  --paper-2: #e6ecf5;
+  --ink: #0b1630;
+  --muted: #4f5d78;
+  --line: rgb(11 22 48 / 0.14);
+  --accent: #2a62c0;
+  --accent-ink: #ffffff;
+  --accent-text: #2a62c0;
+  --band: #0b1630;
+  --band-ink: #f2f5fa;
+  --band-accent: #6ea3ef;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #0a1226;
+    --paper-2: #101b35;
+    --ink: #e8eef9;
+    --muted: #9aa8c4;
+    --line: rgb(232 238 249 / 0.14);
+    --accent: #5b9bf0;
+    --accent-ink: #0a1226;
+    --accent-text: #7fb2f5;
+    --band: #17264b;
+    --band-ink: #e8eef9;
+    --band-accent: #7fb2f5;
+    color-scheme: dark;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-band: var(--band);
+  --color-band-ink: var(--band-ink);
+  --color-band-accent: var(--band-accent);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-geist), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Every interactive element gets a pointer (Tailwind v4 no longer sets it on buttons). */
+  a[href],
+  button,
+  summary,
+  select,
+  label[for],
+  [role="button"],
+  [role="tab"],
+  input[type="submit"],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+  button:disabled,
+  select:disabled,
+  input:disabled {
+    cursor: not-allowed;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Display type: Schibsted Grotesk, heavy and tight. */
+  .display {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  /* The logo's diamond, reused as the site's shape language. */
+  .diamond {
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  }
+
+  /* Logo mark layers: recoloured per theme through CSS masks. */
+  .mark-layer {
+    position: absolute;
+    inset: 0;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+  .mark-body {
+    mask-image: url("/brand/mark-body.png");
+    background: var(--ink);
+  }
+  .mark-dots {
+    mask-image: url("/brand/mark-dots.png");
+    background: var(--accent);
+  }
+}
+
+/* Hero headline lines rise in on load. CSS only, so the LCP text never waits for JS. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.9s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* Single marquee on the site: client logos. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Native <details> accordion marker. */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .acc-icon {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise,
+  .marquee-track {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
