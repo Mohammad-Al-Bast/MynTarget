@@ -68,7 +68,7 @@ function ServiceChapter({ service, flip }: { service: Service; flip: boolean }) 
         <div className="flex items-start gap-6 md:gap-10">
           <span
             aria-hidden="true"
-            className="display text-[clamp(4.5rem,13vw,12rem)] leading-[0.78] text-transparent [-webkit-text-stroke:1.5px_var(--accent)]"
+            className="display text-[clamp(4.5rem,13vw,12rem)] leading-[0.78] text-accent"
           >
             {service.number}
           </span>
