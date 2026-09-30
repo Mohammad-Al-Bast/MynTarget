@@ -7,28 +7,30 @@ import { notFound } from "next/navigation";
 import { ClosingCta } from "@/components/closing-cta";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/cn";
-import { projects } from "@/lib/content";
+import { getProject, getProjects } from "@/lib/cms";
+import { services } from "@/lib/content";
+import { blurProps, imageUrl } from "@/lib/img";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const projects = await getProjects();
   return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata(props: PageProps<"/work/[slug]">): Promise<Metadata> {
   const { slug } = await props.params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProject(slug);
   if (!project) return {};
   return {
     title: `${project.client}: ${project.service}`,
     description: project.summary,
     alternates: { canonical: `/work/${project.slug}` },
-    openGraph: { images: [{ url: project.cover.src.src, alt: project.cover.alt }] },
+    openGraph: { images: [{ url: imageUrl(project.cover), alt: project.cover.alt }] },
   };
 }
 
 export default async function ProjectPage(props: PageProps<"/work/[slug]">) {
   const { slug } = await props.params;
+  const projects = await getProjects();
   const index = projects.findIndex((p) => p.slug === slug);
   if (index === -1) notFound();
   const project = projects[index];
@@ -61,21 +63,21 @@ export default async function ProjectPage(props: PageProps<"/work/[slug]">) {
             </div>
             <div>
               <dt className="text-muted">Discipline</dt>
-              <dd className="mt-1 font-medium">Content & production</dd>
+              <dd className="mt-1 font-medium">{services.find((s) => s.id === project.discipline)?.name}</dd>
             </div>
           </dl>
         </div>
         <div className="relative aspect-[4/5] overflow-hidden bg-paper-2 lg:col-span-5">
-          <Image src={project.cover.src} alt={project.cover.alt} fill priority placeholder="blur" sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+          <Image src={project.cover.src} alt={project.cover.alt} fill priority {...blurProps(project.cover)} sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
         </div>
       </section>
 
       <section aria-label="Gallery" className="mx-auto max-w-[1400px] px-5 pb-24 md:px-8 md:pb-36">
         <ul className="grid gap-4 md:grid-cols-2 md:gap-6">
           {project.gallery.filter((img) => img.src !== project.cover.src).map((img, i) => (
-            <Reveal as="li" key={img.alt} delay={(i % 2) * 0.1} className={cn(i % 2 === 1 && "md:mt-24")}>
+            <Reveal as="li" key={`${img.alt}-${i}`} delay={(i % 2) * 0.1} className={cn(i % 2 === 1 && "md:mt-24")}>
               <div className="relative aspect-[4/5] overflow-hidden bg-paper-2">
-                <Image src={img.src} alt={img.alt} fill placeholder="blur" sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+                <Image src={img.src} alt={img.alt} fill {...blurProps(img)} sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
               </div>
             </Reveal>
           ))}

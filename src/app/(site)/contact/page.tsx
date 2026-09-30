@@ -1,7 +1,7 @@
 import { EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
 import type { Metadata } from "next";
 
-import { ContactForm } from "@/app/contact/contact-form";
+import { ContactForm } from "./contact-form";
 import { locations, site } from "@/lib/content";
 
 export const metadata: Metadata = {

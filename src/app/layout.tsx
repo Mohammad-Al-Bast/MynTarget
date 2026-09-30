@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Schibsted_Grotesk } from "next/font/google";
 
-import { Providers } from "@/components/providers";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-
-import "./globals.css";
-
 const schibsted = Schibsted_Grotesk({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
@@ -47,6 +41,10 @@ export const viewport: Viewport = {
   ],
 };
 
+/**
+ * Document shell only. The site chrome and global styles live in `(site)/layout.tsx`
+ * so the Sanity Studio at `/admin` renders without them.
+ */
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -54,15 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${schibsted.variable} ${geist.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="flex min-h-dvh flex-col">
-        <Providers>
-          <SiteHeader />
-          <main id="main" className="flex-1 pt-[85px]">
-            {children}
-          </main>
-          <SiteFooter />
-        </Providers>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

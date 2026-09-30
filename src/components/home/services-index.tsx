@@ -6,13 +6,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import { ServiceVisual } from "@/components/service-visual";
-import { services, type Service } from "@/lib/content";
+import { services, type Img, type Service } from "@/lib/content";
 
 /**
  * Five disciplines, one scroll. On desktop the left column pins a large visual and
  * numeral that swap as each service panel crosses the middle of the viewport.
  */
-export function ServicesIndex() {
+export function ServicesIndex({ logos }: { logos: Img[] }) {
   const [active, setActive] = useState(0);
   const current = services[active];
 
@@ -37,7 +37,7 @@ export function ServicesIndex() {
                     exit={{ opacity: 0, rotate: 8, scale: 0.9 }}
                     transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <ServiceVisual service={current} className="diamond size-full" />
+                    <ServiceVisual service={current} logos={logos} className="diamond size-full" />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -56,7 +56,7 @@ export function ServicesIndex() {
           {/* Service panels */}
           <ol className="lg:col-span-7">
             {services.map((s, i) => (
-              <ServicePanel key={s.id} service={s} index={i} onActive={setActive} />
+              <ServicePanel key={s.id} service={s} logos={logos} index={i} onActive={setActive} />
             ))}
           </ol>
         </div>
@@ -67,10 +67,12 @@ export function ServicesIndex() {
 
 function ServicePanel({
   service,
+  logos,
   index,
   onActive,
 }: {
   service: Service;
+  logos: Img[];
   index: number;
   onActive: (i: number) => void;
 }) {
@@ -86,7 +88,7 @@ function ServicePanel({
       ref={ref}
       className="flex flex-col justify-center border-t border-line py-14 first:border-t-0 first:pt-0 lg:min-h-[78vh] lg:first:pt-14"
     >
-      <ServiceVisual service={service} className="diamond mb-10 aspect-square w-full max-w-[340px] lg:hidden" />
+      <ServiceVisual service={service} logos={logos} className="diamond mb-10 aspect-square w-full max-w-[340px] lg:hidden" />
       <p className="flex items-center gap-3 text-muted">
         <span className="font-mono text-sm text-accent-text">{service.number}</span>
         {service.name}

@@ -4,7 +4,7 @@ import { ArrowUpRight, Check, EnvelopeSimple, WarningCircle, WhatsappLogo } from
 import Link from "next/link";
 import { useActionState } from "react";
 
-import { sendEnquiry, type EnquiryState, type Field } from "@/app/contact/actions";
+import { sendEnquiry, type EnquiryState, type Field } from "./actions";
 import { cn } from "@/lib/cn";
 import { serviceOptions, site } from "@/lib/content";
 

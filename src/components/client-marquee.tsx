@@ -1,9 +1,10 @@
 import Image from "next/image";
 
-import { clients } from "@/lib/content";
+import { getClients } from "@/lib/cms";
 
 /** The site's one marquee. Logos ship on black, so each sits on its own black tile. */
-export function ClientMarquee() {
+export async function ClientMarquee() {
+  const clients = await getClients();
   const row = [...clients, ...clients];
   return (
     <section aria-labelledby="clients-label" className="border-y border-line py-10">

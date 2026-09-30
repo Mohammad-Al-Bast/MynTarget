@@ -18,7 +18,9 @@ export default function PrivacyPage() {
           <p className="mt-4">
             When you send an enquiry through our contact form, we receive the details you enter (your
             name, company, email, phone, region, the service you&apos;re interested in and your message)
-            and use them only to respond to your enquiry. If you choose to send it as an email draft
+            and use them only to respond to your enquiry. Enquiries are stored in our content management
+            system (Sanity), where only our team can read them, and may be forwarded to our email
+            inbox. If you choose to send it as an email draft
             instead, the information is shared when you send that email.
           </p>
         </section>

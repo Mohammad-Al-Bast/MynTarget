@@ -8,9 +8,11 @@ import { StudioBand } from "@/components/home/studio-band";
 import { ProcessPath } from "@/components/process-path";
 import { ProjectGrid } from "@/components/project-grid";
 import { WhyTabs } from "@/components/why-tabs";
+import { getClients } from "@/lib/cms";
 import { cta, site } from "@/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const logos = await getClients();
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -29,7 +31,7 @@ export default function Home() {
       />
       <HomeHero />
       <ClientMarquee />
-      <ServicesIndex />
+      <ServicesIndex logos={logos} />
 
       <section aria-labelledby="work-title" className="mx-auto max-w-[1400px] px-5 py-24 md:px-8 md:py-36">
         <div className="mb-16 flex flex-col justify-between gap-8 md:mb-24 md:flex-row md:items-end">

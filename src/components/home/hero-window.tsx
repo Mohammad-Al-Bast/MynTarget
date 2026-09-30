@@ -6,14 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { projects } from "@/lib/content";
+import { blurProps } from "@/lib/img";
+import type { Project } from "@/lib/content";
 
 /**
  * The logo's composition, rebuilt as the hero visual: the big diamond is a window
  * onto the portfolio, flanked by the two small brand diamonds. It cycles through the
  * projects so the first thing visitors see is the actual work.
  */
-export function HeroWindow() {
+export function HeroWindow({ projects }: { projects: Project[] }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -23,7 +24,7 @@ export function HeroWindow() {
     if (reduce || paused) return;
     const id = window.setInterval(() => setIndex((i) => (i + 1) % projects.length), 3800);
     return () => window.clearInterval(id);
-  }, [reduce, paused]);
+  }, [reduce, paused, projects.length]);
 
   return (
     <div
@@ -59,7 +60,7 @@ export function HeroWindow() {
                 alt={project.cover.alt}
                 fill
                 priority={index === 0}
-                placeholder="blur"
+                {...blurProps(project.cover)}
                 sizes="(min-width: 1024px) 480px, 90vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />

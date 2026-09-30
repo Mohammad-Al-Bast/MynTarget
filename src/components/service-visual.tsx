@@ -1,15 +1,18 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/cn";
-import { clients, type Service } from "@/lib/content";
+import type { Img, Service } from "@/lib/content";
+import { blurProps } from "@/lib/img";
 
 /** The visual for a service: a photo, the client identities we've touched, or typography. */
 export function ServiceVisual({
   service,
+  logos = [],
   className,
   priority,
 }: {
   service: Service;
+  logos?: Img[];
   className?: string;
   priority?: boolean;
 }) {
@@ -21,7 +24,7 @@ export function ServiceVisual({
           src={v.image.src}
           alt={v.image.alt}
           fill
-          placeholder="blur"
+          {...blurProps(v.image)}
           priority={priority}
           sizes="(min-width: 1024px) 480px, 90vw"
           className="object-cover"
@@ -30,7 +33,7 @@ export function ServiceVisual({
       {v.kind === "logos" && (
         // Identities arranged on the diamond's axes so they read inside the diamond crop too.
         <div className="absolute inset-0 bg-black">
-          {clients.slice(0, 4).map((c, i) => (
+          {logos.slice(0, 4).map((c, i) => (
             <div
               key={c.alt}
               className="absolute size-[30%] -translate-x-1/2 -translate-y-1/2"

@@ -7,8 +7,9 @@ import { PageHero } from "@/components/page-hero";
 import { ProcessPath } from "@/components/process-path";
 import { Reveal } from "@/components/reveal";
 import { ServiceVisual } from "@/components/service-visual";
+import { getClients } from "@/lib/cms";
 import { cn } from "@/lib/cn";
-import { cta, services, type Service } from "@/lib/content";
+import { cta, services, type Img, type Service } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -17,7 +18,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const logos = await getClients();
   return (
     <>
       <PageHero
@@ -48,7 +50,7 @@ export default function ServicesPage() {
       </nav>
 
       {services.map((s, i) => (
-        <ServiceChapter key={s.id} service={s} flip={i % 2 === 1} />
+        <ServiceChapter key={s.id} service={s} logos={logos} flip={i % 2 === 1} />
       ))}
 
       <ProcessPath />
@@ -57,7 +59,7 @@ export default function ServicesPage() {
   );
 }
 
-function ServiceChapter({ service, flip }: { service: Service; flip: boolean }) {
+function ServiceChapter({ service, logos, flip }: { service: Service; logos: Img[]; flip: boolean }) {
   return (
     <section
       id={service.id}
@@ -85,6 +87,7 @@ function ServiceChapter({ service, flip }: { service: Service; flip: boolean }) 
           <Reveal className={cn("lg:col-span-5", flip && "lg:order-2")}>
             <ServiceVisual
               service={service}
+              logos={logos}
               className={cn("aspect-square w-full max-w-[520px]", flip ? "diamond" : "", flip && "lg:ml-auto")}
             />
           </Reveal>

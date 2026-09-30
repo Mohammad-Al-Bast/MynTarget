@@ -26,7 +26,8 @@ import logoCadmus from "@/assets/clients/portfolio-5-16.png";
 import logoMalak from "@/assets/clients/portfolio-5-17.png";
 import logoSaifi from "@/assets/clients/portfolio-5-21.png";
 
-export type Img = { src: StaticImageData; alt: string };
+/** A bundled image (static import) or a CMS image (URL, with an optional blur placeholder). */
+export type Img = { src: StaticImageData | string; alt: string; blurDataURL?: string };
 
 export const site = {
   name: "MYN Target",
@@ -221,6 +222,7 @@ export type Project = {
   client: string;
   tagline: string;
   service: string;
+  discipline: Service["id"];
   summary: string;
   cover: Img;
   gallery: Img[];
@@ -232,6 +234,7 @@ export const projects: Project[] = [
     client: "Sushique",
     tagline: "A feast for the eyes.",
     service: "Food photography",
+    discipline: "production",
     summary:
       "Rich textures, dramatic light and food at the centre of the frame. A selection of restaurant photography from our portfolio.",
     cover: { src: sushi2, alt: "Sushique sushi rolls under dramatic light" },
@@ -247,6 +250,7 @@ export const projects: Project[] = [
     client: "Jay Jewels",
     tagline: "Small details. Lasting impressions.",
     service: "Jewellery photography",
+    discipline: "production",
     summary:
       "A closer look at the details. Product and lifestyle photography that brings the jewellery into focus.",
     cover: { src: jay2, alt: "Jay Jewels jewellery close-up" },
@@ -262,6 +266,7 @@ export const projects: Project[] = [
     client: "Beit El Helo",
     tagline: "Craft you can almost taste.",
     service: "Product photography",
+    discipline: "production",
     summary:
       "From delicate pastries to carefully wrapped products, imagery celebrating the texture and craft of the collection.",
     cover: { src: beit2, alt: "Beit El Helo pistachio pastries on a dark plate" },
@@ -277,6 +282,7 @@ export const projects: Project[] = [
     client: "Lazurd",
     tagline: "Everyday, elevated.",
     service: "Lifestyle photography",
+    discipline: "production",
     summary:
       "Jewellery photographed in a lifestyle setting, balancing the character of each piece with an elegant visual mood.",
     cover: { src: laz4, alt: "Lazurd jewellery in a lifestyle setting" },

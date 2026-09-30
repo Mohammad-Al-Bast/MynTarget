@@ -1,8 +1,10 @@
 import { ButtonLink } from "@/components/button";
 import { HeroWindow } from "@/components/home/hero-window";
+import { getProjects } from "@/lib/cms";
 import { cta } from "@/lib/content";
 
-export function HomeHero() {
+export async function HomeHero() {
+  const projects = await getProjects();
   return (
     <section className="relative mx-auto grid min-h-[calc(100dvh-68px)] max-w-[1400px] items-center gap-10 px-5 pb-16 pt-10 md:px-8 lg:grid-cols-12 lg:gap-6 lg:pt-6">
       <div className="lg:col-span-7">
@@ -28,7 +30,7 @@ export function HomeHero() {
         </div>
       </div>
       <div className="lg:col-span-5">
-        <HeroWindow />
+        <HeroWindow projects={projects} />
       </div>
     </section>
   );

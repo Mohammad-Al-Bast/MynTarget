@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/cn";
-import { projects } from "@/lib/content";
+import { getProjects } from "@/lib/cms";
+import { blurProps } from "@/lib/img";
 
 /**
  * Asymmetric portfolio grid. Tiles alternate wide/narrow and drop in height so the
@@ -18,18 +19,19 @@ const layout = [
 ];
 const ratio = ["aspect-[4/5]", "aspect-square", "aspect-square", "aspect-[5/4]"];
 
-export function ProjectGrid() {
+export async function ProjectGrid() {
+  const projects = await getProjects();
   return (
     <ul className="grid gap-x-8 gap-y-16 md:grid-cols-12 md:gap-y-24">
       {projects.map((p, i) => (
-        <Reveal as="li" key={p.slug} delay={(i % 2) * 0.1} className={layout[i]}>
+        <Reveal as="li" key={p.slug} delay={(i % 2) * 0.1} className={layout[i % layout.length]}>
           <Link href={`/work/${p.slug}`} className="group block">
-            <div className={cn("relative overflow-hidden bg-paper-2", ratio[i])}>
+            <div className={cn("relative overflow-hidden bg-paper-2", ratio[i % ratio.length])}>
               <Image
                 src={p.cover.src}
                 alt={p.cover.alt}
                 fill
-                placeholder="blur"
+                {...blurProps(p.cover)}
                 sizes="(min-width: 768px) 50vw, 100vw"
                 className="object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]"
               />
