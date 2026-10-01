@@ -137,14 +137,14 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
 function fieldClass(invalid: boolean) {
   return cn(
     "h-12 w-full border bg-paper px-4 text-ink outline-none transition-colors focus:border-accent focus-visible:outline-2 focus-visible:outline-accent",
-    invalid ? "border-[#c2410c] dark:border-[#fb923c]" : "border-ink/30",
+    invalid ? "border-danger" : "border-ink/30",
   );
 }
 
 function ErrorText({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p id={id} className="text-sm text-[#c2410c] dark:text-[#fb923c]">
+    <p id={id} className="text-sm text-danger">
       {message}
     </p>
   );

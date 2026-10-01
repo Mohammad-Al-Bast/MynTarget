@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Schibsted_Grotesk } from "next/font/google";
 
+import { ThemeScript } from "@/components/theme-script";
+
 const schibsted = Schibsted_Grotesk({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
@@ -49,9 +51,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${schibsted.variable} ${geist.variable} ${geistMono.variable} antialiased`}
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body>{children}</body>
     </html>
   );
