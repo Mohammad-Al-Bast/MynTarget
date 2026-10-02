@@ -1,7 +1,9 @@
-import { EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { Mail, Phone } from "lucide-react";
+
 import type { Metadata } from "next";
 
 import { ContactForm } from "./contact-form";
+import { WhatsappIcon } from "@/components/icons";
 import { locations, site } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -36,12 +38,12 @@ export default async function ContactPage(props: PageProps<"/contact">) {
           <ul className="mt-6 space-y-3">
             <li>
               <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-accent-text">
-                <WhatsappLogo aria-hidden="true" className="size-5 text-accent-text" /> Chat on WhatsApp
+                <WhatsappIcon aria-hidden="true" className="size-5 text-accent-text" /> Chat on WhatsApp
               </a>
             </li>
             <li>
               <a href={`mailto:${site.email}`} className="flex items-center gap-3 hover:text-accent-text">
-                <EnvelopeSimple aria-hidden="true" className="size-5 text-accent-text" /> {site.email}
+                <Mail aria-hidden="true" className="size-5 text-accent-text" /> {site.email}
               </a>
             </li>
             <li>

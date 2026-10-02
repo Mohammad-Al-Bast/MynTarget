@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "@phosphor-icons/react";
+import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -79,7 +79,7 @@ export function HeroWindow({ projects }: { projects: Project[] }) {
         <Link href={`/work/${project.slug}`} className="group flex items-baseline gap-3">
           <span className="font-medium">{project.client}</span>
           <span className="text-sm text-muted">{project.service}</span>
-          <ArrowUpRight weight="bold" className="size-3.5 self-center text-accent-text transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <ArrowUpRight strokeWidth={2.5} className="size-3.5 self-center text-accent-text transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </Link>
         <div className="flex gap-1.5" role="group" aria-label="Choose project">
           {projects.map((p, i) => (

@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ssr";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,8 +40,8 @@ export default async function ProjectPage(props: PageProps<"/work/[slug]">) {
     <>
       <section className="mx-auto grid max-w-[1400px] items-end gap-12 px-5 pb-20 pt-14 md:px-8 md:pt-20 lg:grid-cols-12">
         <div className="lg:col-span-7">
-          <Link href="/work" className="rise inline-flex items-center gap-2 text-sm text-muted hover:text-ink">
-            <span aria-hidden="true">←</span> All work
+          <Link href="/work" className="rise group inline-flex items-center gap-2 text-sm text-muted hover:text-ink">
+            <ArrowLeft aria-hidden="true" className="size-4 transition-transform group-hover:-translate-x-0.5" /> All work
           </Link>
           <h1 className="rise display mt-8 text-[clamp(3.4rem,9vw,8.5rem)]" style={{ "--i": 1 } as React.CSSProperties}>
             {project.client}
@@ -93,7 +93,7 @@ export default async function ProjectPage(props: PageProps<"/work/[slug]">) {
             </span>
           </span>
           <span className="diamond grid size-20 shrink-0 place-items-center bg-accent text-accent-ink transition-transform duration-500 ease-out-expo group-hover:rotate-90 md:size-28">
-            <ArrowUpRight aria-hidden="true" weight="bold" className="size-7 transition-transform duration-500 group-hover:-rotate-90" />
+            <ArrowUpRight aria-hidden="true" strokeWidth={2.5} className="size-7 transition-transform duration-500 group-hover:-rotate-90" />
           </span>
         </Link>
       </section>

@@ -1,4 +1,4 @@
-import { Microphone } from "@phosphor-icons/react/ssr";
+import { Mic } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -64,7 +64,7 @@ export default function StudioPage() {
           <div className="mt-14 grid gap-4 md:grid-cols-4 md:grid-rows-[300px_300px]">
             <FormatTile className="md:col-span-2 md:row-span-2" image={studioImages.product} title="Product photography" body="Put your product in the spotlight." />
             <Reveal className="flex flex-col justify-between bg-accent p-8 text-accent-ink md:col-span-2">
-              <Microphone aria-hidden="true" weight="light" className="size-14" />
+              <Mic aria-hidden="true" strokeWidth={1.25} className="size-14" />
               <div>
                 <h3 className="display text-4xl">Podcasts</h3>
                 <p className="mt-2 opacity-85">Give your conversations room to grow.</p>

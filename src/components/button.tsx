@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ssr";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/lib/cn";
@@ -41,7 +41,7 @@ export function ButtonLink({
       {children}
       <ArrowUpRight
         aria-hidden="true"
-        weight="bold"
+        strokeWidth={2.5}
         className="size-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
       />
     </Link>

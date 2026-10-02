@@ -1,6 +1,8 @@
-import { ArrowUp, ArrowUpRight, EnvelopeSimple, Phone, WhatsappLogo } from "@phosphor-icons/react/ssr";
+import { ArrowUp, ArrowUpRight, Mail, Phone } from "lucide-react";
+
 import Link from "next/link";
 
+import { WhatsappIcon } from "@/components/icons";
 import { Mark } from "@/components/logo";
 import { nav, services, site } from "@/lib/content";
 
@@ -68,7 +70,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3">
               <li>
                 <a href={`mailto:${site.email}`} className={`${linkClass} inline-flex items-center gap-2.5`}>
-                  <EnvelopeSimple aria-hidden="true" className="size-4 text-band-accent" />
+                  <Mail aria-hidden="true" className="size-4 text-band-accent" />
                   {site.email}
                 </a>
               </li>
@@ -85,9 +87,9 @@ export function SiteFooter() {
                   rel="noopener noreferrer"
                   className={`${linkClass} inline-flex items-center gap-2.5`}
                 >
-                  <WhatsappLogo aria-hidden="true" className="size-4 text-band-accent" />
+                  <WhatsappIcon aria-hidden="true" className="size-4 text-band-accent" />
                   WhatsApp
-                  <ArrowUpRight aria-hidden="true" weight="bold" className="size-3" />
+                  <ArrowUpRight aria-hidden="true" strokeWidth={2.5} className="size-3" />
                 </a>
               </li>
             </ul>
@@ -103,7 +105,7 @@ export function SiteFooter() {
             </Link>
             <a href="#main" className="inline-flex items-center gap-1.5 transition-colors hover:text-band-ink">
               Back to top
-              <ArrowUp aria-hidden="true" weight="bold" className="size-3.5" />
+              <ArrowUp aria-hidden="true" strokeWidth={2.5} className="size-3.5" />
             </a>
           </div>
         </div>

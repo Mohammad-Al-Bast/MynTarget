@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, List, X } from "@phosphor-icons/react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -72,7 +72,7 @@ export function SiteHeader() {
               className="group inline-flex h-10 items-center gap-2 bg-ink px-4 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-accent-ink"
             >
               {cta.contact.label}
-              <ArrowUpRight weight="bold" className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <ArrowUpRight strokeWidth={2.5} className="size-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
           <button
@@ -83,7 +83,7 @@ export function SiteHeader() {
             aria-label={open ? "Close menu" : "Open menu"}
             className="-mr-2 grid size-11 place-items-center md:hidden"
           >
-            {open ? <X size={24} /> : <List size={24} />}
+            {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </header>

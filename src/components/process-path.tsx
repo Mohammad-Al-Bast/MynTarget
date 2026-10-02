@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowsClockwise } from "@phosphor-icons/react";
+import { RefreshCw } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
@@ -43,7 +43,7 @@ export function ProcessPath() {
             <p className="mt-3 max-w-[26ch] text-muted">{step.body}</p>
             {i === processSteps.length - 1 && (
               <p className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent-text">
-                <ArrowsClockwise weight="bold" className="size-4" aria-hidden="true" />
+                <RefreshCw strokeWidth={2.5} className="size-4" aria-hidden="true" />
                 Learn. Refine. Repeat.
               </p>
             )}

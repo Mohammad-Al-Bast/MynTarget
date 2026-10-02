@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "@phosphor-icons/react/ssr";
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -39,7 +39,7 @@ export async function ProjectGrid() {
                 aria-hidden="true"
                 className="diamond absolute bottom-5 right-5 grid size-14 scale-0 place-items-center bg-accent text-accent-ink transition-transform duration-500 ease-out-expo group-hover:scale-100"
               >
-                <ArrowUpRight weight="bold" className="size-5" />
+                <ArrowUpRight strokeWidth={2.5} className="size-5" />
               </span>
             </div>
             <div className="mt-5 flex items-baseline justify-between gap-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "@phosphor-icons/react";
+import { ArrowUpRight } from "lucide-react";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -111,7 +111,7 @@ function ServicePanel({
         className="group mt-10 inline-flex w-fit items-center gap-2 font-medium underline decoration-accent decoration-2 underline-offset-[6px] hover:decoration-ink"
       >
         More on {service.short.toLowerCase()}
-        <ArrowUpRight weight="bold" className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        <ArrowUpRight strokeWidth={2.5} className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </Link>
     </li>
   );

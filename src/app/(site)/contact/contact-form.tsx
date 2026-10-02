@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowUpRight, Check, EnvelopeSimple, WarningCircle, WhatsappLogo } from "@phosphor-icons/react";
+import { ArrowUpRight, Check, CircleAlert, Mail } from "lucide-react";
 import Link from "next/link";
 import { useActionState } from "react";
 
 import { sendEnquiry, type EnquiryState, type Field } from "./actions";
+import { WhatsappIcon } from "@/components/icons";
 import { cn } from "@/lib/cn";
 import { serviceOptions, site } from "@/lib/content";
 
@@ -17,7 +18,7 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
     return (
       <div role="status" className="border border-line bg-paper-2 p-10">
         <span className="diamond grid size-14 place-items-center bg-accent text-accent-ink">
-          <Check weight="bold" className="size-6" aria-hidden="true" />
+          <Check strokeWidth={2.5} className="size-6" aria-hidden="true" />
         </span>
         <h2 className="display mt-8 text-4xl">Thank you. We&apos;ve got it.</h2>
         <p className="mt-4 max-w-[44ch] text-lg text-muted">
@@ -32,7 +33,7 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
       <div role="status" className="border border-line bg-paper-2 p-10">
         {state.status === "error" && (
           <p className="mb-6 flex items-center gap-2 text-accent-text">
-            <WarningCircle aria-hidden="true" className="size-5" /> We couldn&apos;t send that automatically.
+            <CircleAlert aria-hidden="true" className="size-5" /> We couldn&apos;t send that automatically.
           </p>
         )}
         <h2 className="display text-4xl">Your enquiry is ready.</h2>
@@ -41,10 +42,10 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={state.mailto} className="inline-flex h-12 items-center gap-3 bg-accent px-6 font-medium text-accent-ink transition-colors hover:bg-ink hover:text-paper">
-            <EnvelopeSimple aria-hidden="true" weight="bold" className="size-4" /> Open email draft
+            <Mail aria-hidden="true" strokeWidth={2.5} className="size-4" /> Open email draft
           </a>
           <a href={site.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center gap-3 border border-ink/80 px-6 font-medium transition-colors hover:bg-ink hover:text-paper">
-            <WhatsappLogo aria-hidden="true" weight="bold" className="size-4" /> WhatsApp
+            <WhatsappIcon aria-hidden="true" strokeWidth={2.5} className="size-4" /> WhatsApp
           </a>
         </div>
         <p className="mt-6 text-sm text-muted">
@@ -127,7 +128,7 @@ export function ContactForm({ defaultService }: { defaultService?: string }) {
           className="group inline-flex h-12 items-center justify-center gap-3 bg-accent px-7 font-medium text-accent-ink transition-colors hover:bg-ink hover:text-paper active:translate-y-px disabled:opacity-60"
         >
           {pending ? "Sending..." : "Send enquiry"}
-          <ArrowUpRight aria-hidden="true" weight="bold" className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <ArrowUpRight aria-hidden="true" strokeWidth={2.5} className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </button>
       </div>
     </form>

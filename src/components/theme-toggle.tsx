@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Desktop, Moon, Sun } from "@phosphor-icons/react";
+import { Check, Monitor, Moon, Sun, type LucideIcon } from "lucide-react";
 import { useSyncExternalStore } from "react";
 
 import {
@@ -16,10 +16,10 @@ type Mode = "light" | "dark" | "system";
 const KEY = "theme";
 const EVENT = "theme-change";
 
-const options: { mode: Mode; label: string; Icon: typeof Sun }[] = [
+const options: { mode: Mode; label: string; Icon: LucideIcon }[] = [
   { mode: "light", label: "Light", Icon: Sun },
   { mode: "dark", label: "Dark", Icon: Moon },
-  { mode: "system", label: "Device", Icon: Desktop },
+  { mode: "system", label: "Device", Icon: Monitor },
 ];
 
 function read(): Mode {
@@ -74,7 +74,7 @@ export function ThemeToggle({ className }: { className?: string }) {
           <DropdownMenuItem key={m} onSelect={() => apply(m)}>
             <Icon aria-hidden="true" />
             {label}
-            {mode === m && <Check aria-hidden="true" weight="bold" className="ml-auto" />}
+            {mode === m && <Check aria-hidden="true" strokeWidth={2.5} className="ml-auto" />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
